@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susu Gepuk - Kelezatan Tradisional, Nutrisi Modern</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            dark: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Keyframe Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 4s ease-in-out infinite;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="font-sans bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-200/60 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid fa-bottle-droplet text-xl"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-extrabold text-2xl tracking-tight text-brand-900 leading-none">
+                            Susu<span class="text-brand-600">Gepuk</span>
+                        </span>
+                        <span class="text-[10px] font-semibold tracking-widest text-brand-500 uppercase mt-0.5">Premium Milk</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/80">
+                    <a href="#beranda" class="px-5 py-2 rounded-full text-sm font-semibold text-brand-700 bg-white shadow-sm transition-all">Beranda</a>
+                    <a href="#tentang" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-600 hover:bg-white/50 transition-all">Tentang Kami</a>
+                    <a href="#keunggulan" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-600 hover:bg-white/50 transition-all">Keunggulan</a>
+                    <a href="#testimoni" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-600 hover:bg-white/50 transition-all">Testimoni</a>
+                </nav>
+
+                <!-- Action Button / Login -->
+                <div class="hidden md:flex items-center gap-3">
+                    <button onclick="toggleModal('modal-login')" class="px-6 py-2.5 rounded-full text-sm font-bold text-brand-700 hover:text-brand-800 hover:bg-brand-50 transition-all flex items-center gap-2">
+                        <i class="fa-regular fa-user"></i>
+                        Masuk
+                    </button>
+                    <a href="#pesan" class="px-6 py-2.5 rounded-full text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 hover:-translate-y-0.5 transition-all">
+                        Coba Sekarang
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none" aria-label="Menu">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div class="hidden md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-3 pb-6 transition-all" id="mobile-menu">
+            <div class="flex flex-col space-y-2">
+                <a href="#beranda" class="px-4 py-2.5 rounded-xl text-base font-semibold text-brand-600 bg-brand-50">Beranda</a>
+                <a href="#tentang" class="px-4 py-2.5 rounded-xl text-base font-semibold text-slate-600 hover:bg-slate-50">Tentang Kami</a>
+                <a href="#keunggulan" class="px-4 py-2.5 rounded-xl text-base font-semibold text-slate-600 hover:bg-slate-50">Keunggulan</a>
+                <a href="#testimoni" class="px-4 py-2.5 rounded-xl text-base font-semibold text-slate-600 hover:bg-slate-50">Testimoni</a>
+                <hr class="my-2 border-slate-100">
+                <button onclick="toggleModal('modal-login')" class="w-full text-center py-3 rounded-xl font-bold text-brand-700 border border-brand-200 hover:bg-brand-50">
+                    Masuk Akun
+                </button>
+                <a href="#pesan" class="w-full text-center py-3 rounded-xl font-bold text-white bg-brand-600 hover:bg-brand-700 shadow-md">
+                    Pesan Sekarang
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="beranda" class="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32 bg-gradient-to-b from-brand-50 via-white to-slate-50 flex-grow">
+        
+        <!-- Background Decorative Ornaments -->
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-brand-200/50 rounded-full blur-3xl animate-pulse-soft pointer-events-none"></div>
+        <div class="absolute bottom-10 right-0 w-[30rem] h-[30rem] bg-brand-300/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    
+                    <!-- Badge Info -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100/80 border border-brand-200 text-brand-800 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-600 animate-ping"></span>
+                        <span class="font-bold text-brand-600">NEW!</span> Formula Susu Gepuk Murni & Lezat
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.15] tracking-tight mb-6">
+                        Sensasi Kesegaran <br class="hidden sm:inline">
+                        <span class="bg-gradient-to-r from-brand-700 via-brand-600 to-sky-500 bg-clip-text text-transparent">
+                            Susu Gepuk Murni
+                        </span> Yang Kaya Nutrisi
+                    </h1>
+
+                    <!-- Description Text -->
+                    <p class="text-base sm:text-lg text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Diproses secara alami dari susu sapi segar kualitas unggul yang diekstrak secara khusus untuk menghasilkan rasa creamy yang tebal, aroma menggugah selera, dan nutrisi maksimal untuk keluarga Anda.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+                        <a href="#pesan" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-base shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span>Pesan Sekarang</span>
+                        </a>
+                        <a href="#tentang" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-base shadow-sm hover:border-slate-300 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-circle-play text-brand-600"></i>
+                            <span>Pelajari Selengkapnya</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Stats & Rating -->
+                    <div class="pt-8 border-t border-slate-200/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
+                        <div>
+                            <p class="font-heading font-extrabold text-2xl sm:text-3xl text-brand-900">100%</p>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">Susu Sapi Murni</p>
+                        </div>
+                        <div>
+                            <p class="font-heading font-extrabold text-2xl sm:text-3xl text-brand-900">50K+</p>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">Pelanggan Puas</p>
+                        </div>
+                        <div>
+                            <p class="font-heading font-extrabold text-2xl sm:text-3xl text-brand-900">4.9/5</p>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">Rating Ulasan</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Visual / Image Section -->
+                <div class="lg:col-span-5 relative flex justify-center items-center">
+                    
+                    <!-- Background Glow -->
+                    <div class="absolute w-72 h-72 sm:w-96 sm:h-96 bg-brand-400/20 rounded-full blur-2xl"></div>
+
+                    <!-- Card Product Visual Wrapper -->
+                    <div class="relative w-full max-w-md animate-float">
+                        
+                        <!-- Floating Glassmorphism Cards -->
+                        <div class="absolute -top-6 -left-6 glass-card p-3 rounded-2xl shadow-xl border border-white/60 z-20 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-800">Tanpa Pengawet</p>
+                                <p class="text-[10px] text-slate-500">100% Organik & Alami</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-6 -right-6 glass-card p-3.5 rounded-2xl shadow-xl border border-white/60 z-20 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-800">Rasa Creamy Gepuk</p>
+                                <p class="text-[10px] text-slate-500">Tekstur Kaya & Nikmat</p>
+                            </div>
+                        </div>
+
+                        <!-- Main Product Display Box -->
+                        <div class="bg-gradient-to-br from-brand-600 to-brand-800 rounded-3xl p-8 shadow-2xl text-white relative overflow-hidden group">
+                            <!-- Pattern Overlay -->
+                            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            
+                            <div class="relative z-10 flex flex-col items-center text-center">
+                                <!-- Milk Bottle Vector Mockup -->
+                                <div class="w-48 h-64 sm:w-56 sm:h-72 my-4 relative flex items-center justify-center">
+                                    <svg viewBox="0 0 200 300" class="w-full h-full filter drop-shadow-2xl">
+                                        <!-- Bottle Cap -->
+                                        <rect x="75" y="20" width="50" height="20" rx="5" fill="#1e40af" />
+                                        <rect x="70" y="38" width="60" height="8" rx="2" fill="#3b82f6" />
+                                        <!-- Bottle Neck -->
+                                        <path d="M 75 46 L 75 80 Q 50 110 50 140 L 50 260 Q 50 280 70 280 L 130 280 Q 150 280 150 260 L 150 140 Q 150 110 125 46 Z" fill="#ffffff" fill-opacity="0.9" />
+                                        <!-- Liquid Level / Milk -->
+                                        <path d="M 52 140 Q 100 155 148 140 L 148 260 Q 148 278 130 278 L 70 278 Q 52 278 52 260 Z" fill="#e0f2fe" />
+                                        <!-- Bottle Label -->
+                                        <rect x="50" y="150" width="100" height="80" rx="10" fill="#2563eb" />
+                                        <circle cx="100" cy="180" r="18" fill="#ffffff" />
+                                        <path d="M 95 185 Q 100 170 105 185 Z" fill="#2563eb" />
+                                        <text x="100" y="215" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">SUSU GEPUK</text>
+                                    </svg>
+                                </div>
+
+                                <div class="w-full bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                                    <div class="flex justify-between items-center text-left">
+                                        <div>
+                                            <p class="text-xs text-brand-200 uppercase font-semibold tracking-wider">Varian Spesial</p>
+                                            <h3 class="font-heading font-bold text-lg">Original Creamy 1L</h3>
+                                        </div>
+                                        <span class="bg-white text-brand-800 font-extrabold text-sm px-3 py-1.5 rounded-xl shadow-sm">
+                                            Rp 25.000
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FEATURES / ADVANTAGES ================= -->
+    <section id="keunggulan" class="py-16 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Kenapa Memilih Kami</h2>
+                <p class="font-heading text-3xl sm:text-4xl font-extrabold text-slate-900">Keunggulan Susu Gepuk</p>
+                <p class="text-slate-600 mt-3 text-sm sm:text-base">Kombinasi rasa tradisional yang khas dengan standar pengolahan modern dan higienis.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/5 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-cow"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-slate-900 mb-3">100% Sapi Murni</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Diambil dari peternakan sapi lokal pilihan yang dirawat secara organik, menjamin kesegaran susu setiap harinya.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/5 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-mortar-pestle"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-slate-900 mb-3">Tekstur Khas Gepuk</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Metode pengolahan khusus yang menghasilkan kepekatan rasa lezat, gurih alami, dan tidak enek saat diminum.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/5 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-slate-900 mb-3">Kaya Nutrisi & Kalsium</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Mengandung Kalsium, Protein tinggi, dan Vitamin D yang baik untuk tulang serta daya tahan tubuh keluarga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-brand-900 text-white pt-16 pb-12 mt-auto relative overflow-hidden">
+        <!-- Glow Overlay -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-brand-800">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-bottle-droplet text-lg"></i>
+                        </div>
+                        <span class="font-heading font-extrabold text-2xl tracking-tight text-white">
+                            Susu<span class="text-brand-400">Gepuk</span>
+                        </span>
+                    </a>
+                    <p class="text-slate-300 text-sm max-w-sm mb-6 leading-relaxed">
+                        Pelopor minuman susu murni dengan tekstur creamy khas. Menyajikan kebaikan gizi alam langsung ke meja makan Anda.
+                    </p>
+                    <!-- Social Media Links -->
+                    <div class="flex items-center space-x-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-800 hover:bg-brand-600 flex items-center justify-center text-white transition-all" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-800 hover:bg-brand-600 flex items-center justify-center text-white transition-all" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-800 hover:bg-brand-600 flex items-center justify-center text-white transition-all" aria-label="TikTok">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-800 hover:bg-brand-600 flex items-center justify-center text-white transition-all" aria-label="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tautan Cepat 1 -->
+                <div>
+                    <h4 class="font-heading font-bold text-base text-white mb-4">Navigasi</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-300">
+                        <li><a href="#beranda" class="hover:text-brand-400 transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-brand-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#keunggulan" class="hover:text-brand-400 transition-colors">Keunggulan</a></li>
+                        <li><a href="#testimoni" class="hover:text-brand-400 transition-colors">Testimoni</a></li>
+                    </ul>
+                </div>
+
+                <!-- Tautan Cepat 2 -->
+                <div>
+                    <h4 class="font-heading font-bold text-base text-white mb-4">Produk</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-300">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Original Creamy</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Gepuk Cokelat</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Gepuk Matcha</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Paket Keluarga</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Info -->
+                <div>
+                    <h4 class="font-heading font-bold text-base text-white mb-4">Hubungi Kami</h4>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-400"></i>
+                            <span>Jl. Susu Murni No. 12, Jakarta Selatan</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-400"></i>
+                            <span>halo@susugepuk.com</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-400"></i>
+                            <span>+62 812 3456 7890</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
+                <p>&copy; 2026 Susu Gepuk Indonesia. Hak Cipta Dilindungi Undang-Undang.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-slate-300 transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-slate-300 transition-colors">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ================= MODAL LOGIN ================= -->
+    <div id="modal-login" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden border border-slate-100 transform transition-all">
+            
+            <!-- Modal Header -->
+            <div class="p-6 bg-brand-50 border-b border-slate-100 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-brand-600 text-white flex items-center justify-center font-bold text-xs">
+                        <i class="fa-solid fa-bottle-droplet"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-slate-900">Masuk Akun</h3>
+                </div>
+                <button onclick="toggleModal('modal-login')" class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body / Form -->
+            <form onsubmit="event.preventDefault(); alert('Login Berhasil!'); toggleModal('modal-login');" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Email / No. HP</label>
+                    <input type="text" placeholder="nama@email.com" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm transition-all">
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Kata Sandi</label>
+                        <a href="#" class="text-xs text-brand-600 hover:underline">Lupa password?</a>
+                    </div>
+                    <input type="password" placeholder="••••••••" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm transition-all">
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="remember" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+                    <label for="remember" class="text-xs text-slate-600">Ingat saya di perangkat ini</label>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all mt-2">
+                    Masuk Sekarang
+                </button>
+
+                <p class="text-center text-xs text-slate-500 mt-4">
+                    Belum punya akun? <a href="#" class="text-brand-600 font-bold hover:underline">Daftar disini</a>
+                </p>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // Toggle Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if(mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Toggle Modal (Login)
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>
