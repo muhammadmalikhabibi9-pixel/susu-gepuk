@@ -1,0 +1,210 @@
+/* Reset & Tipografi */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #4a3728; /* Cokelat tua */
+    background-color: #fcf8f2; /* Krem hangat */
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Marcellus', serif;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+/* Navigasi */
+header {
+    background-color: #3d2516; /* Cokelat kayu gelap */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo h1 {
+    color: #f7d070; /* Kuning kunyit */
+    font-size: 24px;
+}
+
+.logo h1 span {
+    color: #ffffff;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fcf8f2;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #f7d070;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(61, 37, 22, 0.7), rgba(61, 37, 22, 0.8)), url('https://unsplash.com') no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+.hero-content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #f7d070;
+}
+
+.hero-content p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+/* Tombol */
+.btn {
+    display: inline-block;
+    background-color: #b85c19; /* Oranye bata tradisional */
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #944710;
+}
+
+.btn-wa {
+    background-color: #25d366;
+    margin-top: 20px;
+}
+.btn-wa:hover {
+    background-color: #1ebd58;
+}
+
+/* Judul Section */
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h3 {
+    font-size: 28px;
+    color: #3d2516;
+}
+
+.line {
+    width: 60px;
+    height: 3px;
+    background-color: #b85c19;
+    margin: 10px auto 0 auto;
+}
+
+/* Menu */
+.menu-section {
+    background-color: #f4eae1;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.menu-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    border-top: 5px solid #b85c19;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.menu-card h4 {
+    font-size: 20px;
+    color: #3d2516;
+    margin-bottom: 10px;
+}
+
+.menu-card .price {
+    color: #b85c19;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Kontak */
+.kontak-info {
+    text-align: center;
+    font-size: 18px;
+}
+.kontak-info p {
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #3d2516;
+    color: #a89283;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+}
+
+/* Error Page Style */
+.error-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #fcf8f2;
+}
+
+.error-code {
+    font-size: 100px;
+    font-family: 'Marcellus', serif;
+    color: #b85c19;
+    line-height: 1;
+}
+
+.error-message {
+    font-size: 22px;
+    margin: 20px 0 30px 0;
+    color: #3d2516;
+}
